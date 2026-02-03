@@ -1,0 +1,35 @@
+{
+  "name": "wallet-analyzer",
+  "version": "1.0.0",
+  "description": "CLI utility to analyze Ethereum addresses and generate CSV reports",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "ethereum",
+    "wallet",
+    "analyzer",
+    "csv"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.9.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.10.6",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
