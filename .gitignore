@@ -3,3 +3,8 @@ dist/
 .env
 *.log
 .DS_Store
+# Ignore CSV reports except example files
+reports/*.csv
+!reports/report_0x3ea9f404b46d58e4fa90ec551acf16a1cd057619.csv
+!reports/report_0xd8da6bf26964af9d7eed9e03e53415d37aa96045.csv
+!reports/report_0xdb9751a4624fa32f568ad5bb8536977a71acf627.csv
