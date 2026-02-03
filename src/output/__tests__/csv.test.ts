@@ -60,7 +60,9 @@ describe('writeCsv', () => {
     dust_threshold_eth: '0.001',
     eth_in_dust_tx_count: 0,
     eth_out_dust_tx_count: 1,
-    // Section 5 - Tornado counterparty exposure
+    // Section 6 - Tornado exposure
+    tornado_direct_exposure: false,
+    tornado_direct_tx_count: 0,
     tornado_counterparty_exposure: false,
     counterparties_total: 10,
     counterparties_users_total: 8,
@@ -140,12 +142,14 @@ describe('writeCsv', () => {
     expect(headers.some((h: any) => h.id === 'address')).toBe(true);
     expect(headers.some((h: any) => h.id === 'tx_count')).toBe(true);
     expect(headers.some((h: any) => h.id === 'eth_in_total')).toBe(true);
+    expect(headers.some((h: any) => h.id === 'tornado_direct_exposure')).toBe(true);
+    expect(headers.some((h: any) => h.id === 'tornado_direct_tx_count')).toBe(true);
     expect(headers.some((h: any) => h.id === 'tornado_counterparty_exposure')).toBe(true);
     expect(headers.some((h: any) => h.id === 'erc20_token_count')).toBe(true);
     expect(headers.some((h: any) => h.id === 'erc20_top_symbols')).toBe(true);
     expect(headers.some((h: any) => h.id === 'erc20_top_value_usd')).toBe(true);
     
-    // Should have 53 columns total (50 original + 3 ERC-20)
-    expect(headers.length).toBe(53);
+    // Should have 55 columns total (53 original + 2 direct exposure)
+    expect(headers.length).toBe(55);
   });
 });

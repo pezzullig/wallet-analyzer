@@ -83,7 +83,11 @@ export async function writeCsv(row: CsvRow, outputPath?: string): Promise<string
     { id: 'dust_threshold_eth', title: 'dust_threshold_eth' },
     { id: 'eth_in_dust_tx_count', title: 'eth_in_dust_tx_count' },
     { id: 'eth_out_dust_tx_count', title: 'eth_out_dust_tx_count' },
-    // Section 6 - Tornado counterparty exposure
+    // Section 6 - Tornado exposure
+    // Direct exposure (subject address itself)
+    { id: 'tornado_direct_exposure', title: 'tornado_direct_exposure' },
+    { id: 'tornado_direct_tx_count', title: 'tornado_direct_tx_count' },
+    // Indirect exposure (through counterparties)
     { id: 'tornado_counterparty_exposure', title: 'tornado_counterparty_exposure' },
     { id: 'counterparties_total', title: 'counterparties_total' },
     { id: 'counterparties_users_total', title: 'counterparties_users_total' },

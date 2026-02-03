@@ -82,13 +82,17 @@ export interface CsvRow {
   eth_in_dust_tx_count: number;
   eth_out_dust_tx_count: number;
 
-  // Section 5 - Tornado counterparty exposure
+  // Section 6 - Tornado exposure
+  // Direct exposure (subject address itself)
+  tornado_direct_exposure: boolean;
+  tornado_direct_tx_count: number;
+  // Indirect exposure (through counterparties)
   tornado_counterparty_exposure: boolean;
   counterparties_total: number;
   counterparties_users_total: number;
   counterparties_checked: number;
   counterparties_tornado_exposed_count: number;
-  counterparties_tornado_exposed_share: string; // Percentage as string (e.g., "50.00%")
+  counterparties_tornado_exposed_share: string; // Percentage as string (e.g., "50%")
 
   // Section 6 - ERC-20 token holdings
   erc20_token_count: number;

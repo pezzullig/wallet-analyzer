@@ -5,12 +5,16 @@ import { isTornadoPool } from '../intel/tornado';
 import { COUNTERPARTY_TX_CHECK_LIMIT } from '../config';
 
 export interface TornadoExposureResult {
+  // Direct exposure (subject address itself)
+  tornado_direct_exposure: boolean;
+  tornado_direct_tx_count: number;
+  // Indirect exposure (through counterparties)
   tornado_counterparty_exposure: boolean;
   counterparties_total: number;
   counterparties_users_total: number;
   counterparties_checked: number;
   counterparties_tornado_exposed_count: number;
-  counterparties_tornado_exposed_share: string; // Percentage as string (e.g., "50.00%")
+  counterparties_tornado_exposed_share: string; // Percentage as string (e.g., "50%")
 }
 
 /**
@@ -26,6 +30,9 @@ export async function computeTornadoExposure(
   subjectAddress?: string
 ): Promise<TornadoExposureResult> {
   // First, check if the subject address itself interacted with Tornado pools
+  let tornado_direct_exposure = false;
+  let tornado_direct_tx_count = 0;
+  
   if (subjectAddress) {
     const subjectLower = subjectAddress.toLowerCase();
     const directTornadoTxs = txs.filter((tx) => {
@@ -33,9 +40,12 @@ export async function computeTornadoExposure(
       return toLower && isTornadoPool(toLower);
     });
     
-    if (directTornadoTxs.length > 0) {
+    tornado_direct_tx_count = directTornadoTxs.length;
+    tornado_direct_exposure = tornado_direct_tx_count > 0;
+    
+    if (tornado_direct_exposure) {
       console.log(`  ⚠️  DIRECT TORNADO INTERACTION DETECTED!`);
-      console.log(`     Subject address interacted with Tornado pools in ${directTornadoTxs.length} transaction(s)`);
+      console.log(`     Subject address interacted with Tornado pools in ${tornado_direct_tx_count} transaction(s)`);
       directTornadoTxs.forEach((tx, idx) => {
         console.log(`     TX ${idx + 1}: ${tx.hash} -> ${tx.to} (Tornado pool)`);
       });
@@ -152,6 +162,8 @@ export async function computeTornadoExposure(
       : '0%';
 
   return {
+    tornado_direct_exposure,
+    tornado_direct_tx_count,
     tornado_counterparty_exposure,
     counterparties_total,
     counterparties_users_total,

@@ -86,11 +86,20 @@ Complete reference of all columns in the wallet analyzer CSV output, organized b
 
 ---
 
-## Section 6 — Tornado Counterparty Exposure
+## Section 6 — Tornado Exposure
+
+### Direct Exposure (Subject Address Itself)
 
 | Column | Type | Description |
 |--------|------|-------------|
-| `tornado_counterparty_exposure` | boolean | Any checked counterparty interacted with Tornado Cash pools |
+| `tornado_direct_exposure` | boolean | Whether the subject address itself sent funds directly to Tornado Cash pools |
+| `tornado_direct_tx_count` | number | Number of transactions where the subject address sent funds to Tornado Cash pools |
+
+### Indirect Exposure (Through Counterparties)
+
+| Column | Type | Description |
+|--------|------|-------------|
+| `tornado_counterparty_exposure` | boolean | Whether any checked counterparty interacted with Tornado Cash pools |
 | `counterparties_total` | number | Unique counterparties in sample (outgoing → to, incoming → from) |
 | `counterparties_users_total` | number | Unique EOAs among counterparties (filtered using getCode) |
 | `counterparties_checked` | number | How many EOAs checked (capped, default: 25) |
@@ -101,13 +110,13 @@ Complete reference of all columns in the wallet analyzer CSV output, organized b
 
 ## Column Summary
 
-- **Total Columns:** 53
+- **Total Columns:** 55
 - **Section 1 (Basics):** 10 columns
 - **Section 2 (ERC-20):** 3 columns
 - **Section 3 (Transaction Overview):** 9 columns
 - **Section 4 (Transaction Types):** 6 columns
 - **Section 5 (ETH Flow):** 18 columns
-- **Section 6 (Tornado Exposure):** 6 columns
+- **Section 6 (Tornado Exposure):** 8 columns (2 direct + 6 indirect)
 
 ---
 

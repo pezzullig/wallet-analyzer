@@ -71,22 +71,22 @@ The tool accepts an Ethereum address or ENS name, fetches the last N normal tran
 - **Transaction Overview**: Activity patterns, active days, transaction frequency
 - **Transaction Types**: Breakdown of simple transfers, contract calls, and contract creations
 - **ETH Flow**: Incoming/outgoing statistics, averages, medians, percentiles, dust detection
-- **Tornado Counterparty Exposure**: Checks if any counterparties (EOAs) in the transaction history have directly interacted with Tornado Cash pools (24 pools monitored: ETH, DAI, USDC, USDT, WBTC, cDAI, cETH)
+- **Tornado Exposure**: Detects both direct exposure (subject address sent funds to Tornado Cash pools) and indirect exposure (counterparties have interacted with Tornado Cash pools). Monitors 24 pools: ETH, DAI, USDC, USDT, WBTC, cDAI, cETH
 
 ## Output
 
-The tool generates a CSV file (default: `report_<address>.csv`) with a single row containing all computed metrics. The CSV contains **53 columns** organized into 6 sections.
+The tool generates a CSV file (default: `report_<address>.csv`) with a single row containing all computed metrics. The CSV contains **55 columns** organized into 6 sections.
 
 ## Documentation
 
 ### 📊 [CSV Columns Reference](./CSV_COLUMNS_REFERENCE.md)
-Complete reference of all 53 CSV columns organized by section:
+Complete reference of all 55 CSV columns organized by section:
 - **Section 1 — Basics** (10 columns): Address info, ENS, balance, contract status
 - **Section 2 — ERC-20 Token Holdings** (3 columns): Token count, top symbols, USD value
 - **Section 3 — Transaction Overview** (9 columns): Activity metrics, date ranges, frequency
 - **Section 4 — Transaction Type Breakdown** (6 columns): Transfer types, contract interactions, ratios
 - **Section 5 — ETH Flow** (18 columns): In/out statistics, percentiles, dust detection
-- **Section 6 — Tornado Counterparty Exposure** (6 columns): Exposure detection metrics
+- **Section 6 — Tornado Exposure** (8 columns): Direct exposure (2 columns) and indirect exposure through counterparties (6 columns)
 
 ### 📈 [Analysis Summary](./ANALYSIS_SUMMARY.md)
 Summary of findings from sample wallet analyses, including:
@@ -101,13 +101,20 @@ Metrics are computed over the **last N normal transactions** (default: 200) fetc
 
 ### Tornado Exposure Definition
 
-The tool checks counterparties (unique addresses the subject interacted with) by:
-1. Extracting all counterparties from the transaction history
-2. Filtering to EOAs (Externally Owned Accounts, i.e., "users")
-3. Capping the check to the first 25 EOAs (configurable)
-4. For each checked counterparty, fetching their transaction history and checking if any transaction sent funds to a known Tornado Cash pool address
+The tool detects Tornado Cash exposure in two ways:
 
-**Direct interactions** are also detected - if the subject address itself sent funds to a Tornado pool, this is logged separately.
+**1. Direct Exposure:**
+- Checks if the subject address itself sent funds directly to any known Tornado Cash pool
+- Reported in `tornado_direct_exposure` (boolean) and `tornado_direct_tx_count` (number)
+
+**2. Indirect Exposure (Counterparty Analysis):**
+- Extracts all counterparties (unique addresses the subject interacted with)
+- Filters to EOAs (Externally Owned Accounts, i.e., "users")
+- Caps the check to the first 25 EOAs (configurable)
+- For each checked counterparty, fetches their transaction history and checks if any transaction sent funds to a known Tornado Cash pool address
+- Reported in `tornado_counterparty_exposure` and related counterparty metrics
+
+Both direct and indirect exposure are tracked separately in the CSV output to provide clear visibility into the type of exposure detected.
 
 ## Build
 

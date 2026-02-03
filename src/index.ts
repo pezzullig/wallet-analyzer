@@ -142,6 +142,8 @@ async function main() {
     const tornadoExposure = txs.length > 0
       ? await computeTornadoExposure(txs, provider, COUNTERPARTY_CHECK_CAP, address)
       : {
+          tornado_direct_exposure: false,
+          tornado_direct_tx_count: 0,
           tornado_counterparty_exposure: false,
           counterparties_total: 0,
           counterparties_users_total: 0,
@@ -183,16 +185,13 @@ async function main() {
       tx_per_day: overview.tx_per_day,
       max_txs_in_single_day: overview.max_txs_in_single_day,
 
-      // Section 2 - ERC-20 token holdings
-      ...erc20Metrics,
-
       // Section 4 - Transaction type breakdown
       ...txTypes,
 
       // Section 5 - ETH flow
       ...ethFlow,
 
-      // Section 6 - Tornado counterparty exposure
+      // Section 6 - Tornado exposure (direct and indirect)
       ...tornadoExposure,
     };
 
