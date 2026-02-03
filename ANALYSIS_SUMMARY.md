@@ -13,7 +13,8 @@ Analysis of 3 Ethereum addresses with Tornado Cash exposure detection.
 **Top Token Value:** $1,285,460.58  
 **Transactions Analyzed:** 200  
 **Tornado Exposure:** ✓ No  
-**Counterparties Checked:** 25 of 47 EOAs
+**Counterparties Checked:** 25 of 47 EOAs  
+**📄 [View CSV Report](https://github.com/pezzullig/wallet-analyzer/blob/main/reports/report_0xd8da6bf26964af9d7eed9e03e53415d37aa96045.csv)**
 
 ---
 
@@ -25,8 +26,10 @@ Analysis of 3 Ethereum addresses with Tornado Cash exposure detection.
 **Top Token Value:** $65.40  
 **Transactions Analyzed:** 3  
 **Tornado Exposure:** ⚠️ **YES - DIRECT INTERACTION**  
-**Exposed Share:** 50%  
-**Details:** Direct transaction to Tornado Cash 0.1 ETH pool (`0x12d66f87a04a9e220743712ce6d9bb1b5616b8fc`)
+**Direct TX Count:** 1  
+**Counterparty Exposure:** No  
+**Details:** Direct transaction to Tornado Cash 0.1 ETH pool (`0x12d66f87a04a9e220743712ce6d9bb1b5616b8fc`)  
+**📄 [View CSV Report](https://github.com/pezzullig/wallet-analyzer/blob/main/reports/report_0x3ea9f404b46d58e4fa90ec551acf16a1cd057619.csv)**
 
 ---
 
@@ -37,8 +40,10 @@ Analysis of 3 Ethereum addresses with Tornado Cash exposure detection.
 **ERC-20 Tokens:** 0 positions  
 **Transactions Analyzed:** 2  
 **Tornado Exposure:** ⚠️ **YES - INDIRECT EXPOSURE**  
-**Exposed Share:** 50%  
-**Details:** Indirect exposure through counterparty `0x3Ea9f404...` which directly interacted with Tornado Cash
+**Direct TX Count:** 0  
+**Counterparty Exposure:** Yes (50% of checked counterparties)  
+**Details:** Indirect exposure through counterparty `0x3Ea9f404...` which directly interacted with Tornado Cash  
+**📄 [View CSV Report](https://github.com/pezzullig/wallet-analyzer/blob/main/reports/report_0xdb9751a4624fa32f568ad5bb8536977a71acf627.csv)**
 
 ---
 

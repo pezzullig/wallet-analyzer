@@ -95,6 +95,12 @@ Summary of findings from sample wallet analyses, including:
 - High-value wallet analysis examples
 - Detection methodology and coverage details
 
+### 📄 Example CSV Reports
+View example analysis outputs:
+- [Direct Tornado Exposure Example](https://github.com/pezzullig/wallet-analyzer/blob/main/reports/report_0x3ea9f404b46d58e4fa90ec551acf16a1cd057619.csv) - Address with direct interaction with Tornado Cash
+- [High-Activity Wallet Example](https://github.com/pezzullig/wallet-analyzer/blob/main/reports/report_0xd8da6bf26964af9d7eed9e03e53415d37aa96045.csv) - Vitalik's address (vitalik.eth)
+- [Indirect Exposure Example](https://github.com/pezzullig/wallet-analyzer/blob/main/reports/report_0xdb9751a4624fa32f568ad5bb8536977a71acf627.csv) - Address with indirect exposure through counterparty
+
 ## Analysis Scope
 
 Metrics are computed over the **last N normal transactions** (default: 200) fetched from Etherscan. The analysis includes:
